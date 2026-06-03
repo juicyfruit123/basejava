@@ -6,7 +6,6 @@ import java.util.Arrays;
 
 public class SortedArrayStorage extends AbstractArrayStorage {
 
-
     @Override
     public void update(Resume r) {
         int index = findResumeIndex(r.getUuid());
