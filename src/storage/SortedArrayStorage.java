@@ -5,27 +5,11 @@ import model.Resume;
 import java.util.Arrays;
 
 public class SortedArrayStorage extends AbstractArrayStorage {
-
     @Override
-    public void update(Resume r) {
-        int index = findResumeIndex(r.getUuid());
-        if (index < 0) {
-            System.out.println("Resume " + r.getUuid() + " not exist");
-            return;
-        }
+    protected void saveResume(Resume r, int index) {
+        index = -(index + 1);
+        System.arraycopy(storage, index, storage, index + 1, size - index);
         storage[index] = r;
-    }
-
-    @Override
-    public void save(Resume r) {
-        if (size >= storage.length) {
-            System.out.println("Ошибка: хранилище переполнено");
-            return;
-        }
-        int insertionPoint = findResumeIndex(r.getUuid());
-        insertionPoint = -(insertionPoint + 1);
-        System.arraycopy(storage, insertionPoint, storage, insertionPoint + 1, size - insertionPoint);
-        storage[insertionPoint] = r;
         size++;
     }
 
